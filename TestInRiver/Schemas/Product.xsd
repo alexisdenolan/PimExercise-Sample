@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://www.inriver.com/pim/6/std/3.0" elementFormDefault="qualified" targetNamespace="http://www.inriver.com/pim/6/std/3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Products" type="tns:Products" />
+  <xs:complexType name="Products">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="Product" type="tns:Product" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="Product">
+    <xs:sequence minOccurs="0" maxOccurs="1">
+      <xs:element name="ProductFields" type="tns:ProductFieldsType" />
+      <xs:element name="ProductLinks" type="tns:ProductLinksType" />
+      <xs:element name="ProductAdditionals" type="tns:ProductAdditionalsType" />
+    </xs:sequence>
+    <xs:attribute name="EntityId" type="xs:integer" use="optional" />
+    <xs:attribute name="Action" type="tns:EntityActions" use="optional" />
+    <xs:attribute name="ExternalUniqueIdField" type="tns:ProductExternalUniqueIdFields" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ProductFieldsType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element minOccurs="0" name="ProductChannelNodeId">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="xs:string" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductDisplayName">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductFullDescription">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductId">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="xs:string" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductManufacturer">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:ManufacturerCvl" />
+          </xs:choice>
+          <xs:attribute name="Cvl" type="tns:CvlIds" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" name="ProductName">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="xs:string" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductSEODescription">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductSEOKeywords">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductSEOTitle">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductSEOURL">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductShortDescription">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="tns:LocaleStringType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductTempMappingId">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="xs:string" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProductTranslationReviewed">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="Data" type="xs:string" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ProductLinksType">
+    <xs:sequence>
+      <xs:element name="ProductParentLinks" type="tns:ProductParentLinksType" />
+      <xs:element name="ProductChildLinks" type="tns:ProductChildLinksType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductParentLinksType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="BundleProduct">
+        <xs:complexType>
+          <xs:attribute fixed="Bundle" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:BundleUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ChannelNodeProducts">
+        <xs:complexType>
+          <xs:attribute fixed="ChannelNode" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:ChannelNodeUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FamilyProduct">
+        <xs:complexType>
+          <xs:attribute fixed="Family" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:FamilyUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductRelatedProduct">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:ProductUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SectionProducts">
+        <xs:complexType>
+          <xs:attribute fixed="Section" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:SectionUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TaskProducts">
+        <xs:complexType>
+          <xs:attribute fixed="Task" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:TaskUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="SourceEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ProductChildLinksType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="ProductBulletPhrase">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Phrase" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:PhraseUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductItem">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Item" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:ItemUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductRelatedProduct">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Product" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:ProductUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductResource">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Resource" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:ResourceUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductSpecifications">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="Specification" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:SpecificationUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ProductWebRef">
+        <xs:complexType>
+          <xs:attribute fixed="Product" name="SourceEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute fixed="WebRef" name="TargetEntityTypeId" type="xs:string" use="required" />
+          <xs:attribute name="UniqueFieldName" type="tns:WebRefUniqueFields" use="required" />
+          <xs:attribute name="UniqueValue" type="xs:string" use="required" />
+          <xs:attribute name="TargetEntityId" type="xs:integer" use="required" />
+          <xs:attribute name="LinkEntityId" type="xs:string" use="optional" />
+          <xs:attribute name="LinkEntityTypeId" type="xs:string" use="optional" />
+          <xs:attribute name="Action" type="tns:LinkActions" use="optional" />
+          <xs:attribute name="SortOrder" type="xs:integer" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ProductAdditionalsType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="SpecificationData" type="tns:SpecificationDataType" />
+      <xs:element name="SpecificationTemplate" type="tns:SpecificationTemplateType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="SpecificationDataType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" name="Row" type="tns:SpecificationDataRowType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="SpecificationDataRowType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="SpecificationFieldTypeId" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="Data" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StringType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="cvl" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SpecificationTemplateType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" name="SpecificationFieldType" type="tns:SpecificationFieldTypeType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="SpecificationFieldTypeType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Name" type="tns:LocaleStringType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DataType" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Mandatory" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Index" type="xs:integer" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CategoryId" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CategoryName" type="tns:LocaleStringType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DefaultValue" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CVLId" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Multivalue" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Unit" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Additional" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LocaleStringType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="LocaleString">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Language" type="tns:Language" />
+            <xs:element name="Value" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ProductFieldSets">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="EntityActions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="New" />
+      <xs:enumeration value="Updated" />
+      <xs:enumeration value="Deleted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LinkActions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Deleted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Language">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="da" />
+      <xs:enumeration value="en" />
+      <xs:enumeration value="fi" />
+      <xs:enumeration value="no" />
+      <xs:enumeration value="sv" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProductExternalUniqueIdFields">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="CvlIds">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Manufacturer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BundleUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ChannelNodeUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FamilyUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+      <xs:enumeration value="FamilyName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PhraseUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+      <xs:enumeration value="PhraseName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ItemUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+      <xs:enumeration value="ItemId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProductUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+      <xs:enumeration value="ProductId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResourceUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SpecificationUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WebRefUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SectionUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+      <xs:enumeration value="SectionId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TaskUniqueFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EntityId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ManufacturerCvl">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="Bisley" />
+      <xs:enumeration value="Gerdsman" />
+      <xs:enumeration value="TestKey" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
